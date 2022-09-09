@@ -1,0 +1,102 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" xmlns:lv="nativescript-ui-listview">
+    <ActionBar title="My App" icon="" />
+
+<GridLayout rows="auto *" backgroundColor="#f2f2f2">
+
+  <lv:RadListView
+    height="650"
+    row="1"
+    [items]="data"
+    #ListElement
+    [filteringFunction]="searchFunction"
+    [itemTemplateSelector]="templateSelectorFunc"
+  >
+    <ng-template
+      let-item="item"
+      let-i="index"
+      tkListItemTemplate
+      tkTemplateKey="regular"
+    >
+      <!-- <AppCheckbox
+        [text]="item.name"
+        [checked]="item?.checked"
+        (change)="checkUncheck(item.id, !item.checked, item.type)"
+        [cssStyles]="{
+          margin: '0 16',
+          borderBottomWidth: 1,
+          borderBottomColor: '#E4E6EF'
+        }"
+      >
+      </AppCheckbox> -->
+      <GridLayout
+        columns="auto,*"
+        padding="0"
+        margin="0 16"
+        alignItems="center"
+        borderBottomWidth="1"
+        borderBottomColor="#E4E6EF"
+      >
+        <Switch
+          col="0"
+          [checked]="item?.checked"
+          (tap)="checkUncheck(item.id, !item.checked, item.type)"
+        >
+        </Switch>
+
+        <Label
+          col="1"
+          [text]="item.name"
+          flexGrow="1"
+          class="text OpenSansRegular"
+        ></Label>
+      </GridLayout>
+    </ng-template>
+
+    <ng-template
+      let-item="item"
+      let-i="index"
+      tkListItemTemplate
+      tkTemplateKey="start"
+    >
+      <FlexboxLayout
+        padding="0"
+        margin="0 16"
+        alignItems="center"
+        borderBottomWidth="1"
+        borderBottomColor="#E4E6EF"
+      >
+        <Label
+          [text]="item.name"
+          flexGrow="1"
+          class="text OpenSansRegular"
+        ></Label>
+      </FlexboxLayout>
+    </ng-template>
+
+    <ng-template
+      let-item="item"
+      let-i="index"
+      tkListItemTemplate
+      tkTemplateKey="end"
+    >
+      <FlexboxLayout
+        padding="0"
+        margin="0 16"
+        alignItems="center"
+        borderBottomWidth="1"
+        borderBottomColor="#E4E6EF"
+      >
+        <Label
+          [text]="item.name"
+          flexGrow="1"
+          class="text OpenSansRegular"
+        ></Label>
+      </FlexboxLayout>
+    </ng-template>
+  </lv:RadListView>
+
+  <ActivityIndicator row="0" rowSpan="2" [busy]="isLoading$ | ngrxPush">
+  </ActivityIndicator>
+</GridLayout>
+
+</Page>
